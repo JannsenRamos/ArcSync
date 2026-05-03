@@ -1,0 +1,27 @@
+# Core Web Framework
+streamlit>=1.28.0
+
+# Environment & Configuration
+python-dotenv>=1.0.0
+
+# HTTP Requests (used by watsonx_client.py for REST API calls)
+requests>=2.31.0
+
+# API Framework (optional - for future API endpoints)
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.0.0
+
+# ============================================
+# DEPENDENCY AUDIT NOTES
+# ============================================
+#
+# OPTIMIZATION APPLIED:
+# Removed ibm-watsonx-ai SDK because watsonx_client.py uses direct REST API calls.
+# This eliminates pandas/numpy dependencies and build issues on Windows.
+#
+# The REST API approach provides:
+# - Faster installation (no C++ compilation needed)
+# - Smaller dependency footprint
+# - Same functionality via HTTP requests
+# - Better cross-platform compatibility

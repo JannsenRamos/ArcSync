@@ -1,0 +1,44 @@
+IBM BOB DEV DAY HACKATHON 2026 - SUBMISSION COMPLIANCE CHECKLIST
+
+-------------------------------------------------------------------------------
+THE "SHOULDS" (MANDATORY REQUIREMENTS)
+-------------------------------------------------------------------------------
+1. USE IBM BOB: All submissions must utilize IBM Bob technology to be eligible 
+   for prizes [cite: 67].
+2. INCLUDE MANDATORY DELIVERABLES:
+   - Video demonstration showing the solution and how IBM Bob was used [cite: 60].
+   - Written problem and solution statements [cite: 61].
+   - Written statement on IBM Bob utilization [cite: 62].
+   - Working code repository or evidence of the proof-of-concept [cite: 63].
+   - Exported IBM Bob report of all relevant tasks/sessions [cite: 63].
+3. MEET THE DEADLINE: Submit everything before 10:00 AM ET on May 3, 2026 [cite: 14].
+4. ENSURE ORIGINALITY: The work must be original to the contest and not developed 
+   substantially before May 1, 2026 [cite: 79].
+5. USE ENGLISH: All submission materials must be in English [cite: 64].
+6. COMPLY WITH ELIGIBILITY:
+   - Be 18+ or the age of emancipation [cite: 21].
+   - Disclose your employer or affiliated organization [cite: 82].
+7. PROVIDE ACCESS: Make the submission available free of charge for testing and 
+   evaluation by Sponsors [cite: 66].
+
+-------------------------------------------------------------------------------
+THE "SHOULDN'TS" (PROHIBITIONS & RISKS)
+-------------------------------------------------------------------------------
+1. DON'T SUBMIT PRIOR WORK: Submissions developed in substantive form prior to 
+   the contest period may be disqualified [cite: 79, 141].
+2. DON'T VIOLATE IP RIGHTS: Do not use third-party technology (including AI models 
+   like Opus 4.6) unless you follow their license terms and ensure they don't 
+   conflict with the license you grant to IBM [cite: 181, 184, 190].
+3. DON'T DOUBLE-DIP: Do not participate on more than one team or submit one 
+   entry multiple times [cite: 49, 64].
+4. DON'T INCLUDE HARMFUL CODE: No malware, viruses, trojans, worms, or 
+   spyware [cite: 89].
+5. DON'T USE SENSITIVE CONTENT: No pornographic, defamatory, violent, 
+   discriminatory, highly political, or religious content [cite: 94].
+6. DON'T DISPARAGE SPONSORS: Do not include content that refers negatively to 
+   IBM, BeMyApp, or the Event [cite: 96].
+7. DON'T VIOLATE CODE OF CONDUCT: Avoid harassment, including offensive 
+   verbal comments or inappropriate behavior [cite: 235, 236].
+8. DON'T MISS THE CLOCK: The Sponsors' clock is the official timekeeper; late 
+   entries may lead to entire team disqualification [cite: 17, 14].
+
