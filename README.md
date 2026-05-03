@@ -3,6 +3,8 @@
 > **IBM Bob Dev Day Hackathon 2026** 🏆  
 > *Turning ideas into impact faster with IBM Bob*
 
+🌐 **Live Demo**: [arc-sync-hck305.vercel.app](https://arc-sync-hck305.vercel.app)
+
 ## 🎥 Demo Video
 [Watch 2-minute demo](https://drive.google.com/file/d/1yr_mMG23JpOANmzWqUEiZFYiW9F_p4KW/view?usp=sharing)
 
@@ -34,7 +36,7 @@ ArcSync reads your **ACTUAL codebase** and generates specifications that:
 ## 🎯 What Makes Us Novel
 
 ### 1. **Hybrid RAG with Architectural Weighting**
-Not just keyword matching - we understand that `models/user.js` is **3x more important** than `utils/helper.js` when planning features.
+Not just keyword matching — we understand that `models/user.js` is **3x more important** than `utils/helper.js` when planning features.
 
 **Weighting System:**
 - Models/Schemas: **3.0x** weight (highest impact)
@@ -88,13 +90,18 @@ When you say "login", we search for:
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/yourusername/arcsync.git
-cd arcsync
+git clone https://github.com/JannsenRamos/ArcSync.git
+cd ArcSync
 
-# 2. Install dependencies
+# 2. Create virtual environment
+python -m venv .venv
+.venv\Scripts\activate   # Windows
+# source .venv/bin/activate  # macOS/Linux
+
+# 3. Install dependencies
 pip install -r requirements.txt
 
-# 3. Configure credentials
+# 4. Configure credentials
 cp .env.example .env
 # Edit .env with your IBM credentials
 ```
@@ -110,56 +117,51 @@ WATSONX_URL=https://us-south.ml.cloud.ibm.com
 
 ### Run the Application
 
-**Option 1: Deploy to Vercel (Production)**
+**Local Development:**
 ```bash
-# See VERCEL_DEPLOYMENT.md for detailed instructions
-vercel --prod
-```
-🌐 **Live Demo**: Deploy your own instance to Vercel in minutes!
-
-**Option 2: FastAPI Web UI (Local Development)**
-```bash
+# Start the FastAPI server
 python static/server.py
 # Open http://localhost:8000
 ```
 
-**Option 3: Streamlit UI (Alternative)**
+Or with hot-reloading:
 ```bash
-streamlit run main.py
+uvicorn static.server:app --reload
+# Open http://localhost:8000
 ```
 
-### 🚀 Deploy to Vercel
+---
 
-Deploy ArcSync to production with one click:
+## 🌐 Deploy to Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/arcsync)
+ArcSync is deployed on Vercel as a serverless Python application.
 
 **Quick Deploy Steps:**
-1. Click the button above or push to GitHub
-2. Import your repository to Vercel
-3. Add environment variables (IBM_API_KEY, WATSONX_PROJECT_ID, WATSONX_URL)
+1. Push your code to GitHub
+2. Import the repository in [Vercel](https://vercel.com)
+3. Add these environment variables in **Settings → Environment Variables**:
+   - `IBM_API_KEY` — your IBM API key
+   - `WATSONX_PROJECT_ID` — your Watsonx project ID
+   - `WATSONX_URL` — your Watsonx endpoint (e.g. `https://us-south.ml.cloud.ibm.com`)
 4. Deploy!
 
-📖 **Full deployment guide**: See [VERCEL_DEPLOYMENT.md](VERCEL_DEPLOYMENT.md) for detailed instructions.
+> **Note:** The Vercel deployment uses `/tmp` for writable storage (logs, indexes, uploads) since Vercel's filesystem is read-only. Uploaded repos are ephemeral and won't persist across cold starts.
 
-### 📤 Upload Your Own Repository
+---
 
-ArcSync now supports uploading your own repositories for testing!
+## 📤 Upload Your Own Repository
+
+ArcSync supports uploading your own repositories for analysis!
 
 1. **Click "Upload ZIP"** in the web interface
 2. **Select your repository ZIP file** (max 50MB)
-3. **Start testing** with your actual codebase immediately
+3. **Start generating specs** against your actual codebase
 
-**See [HOW_TO_UPLOAD_REPOS.md](HOW_TO_UPLOAD_REPOS.md) for detailed instructions.**
-
-**Alternative:** Manually copy your repo to `test_repos/` directory:
+**Alternative (local only):** Manually copy your repo to `test_repos/` directory:
 ```bash
 cp -r /path/to/your/repo test_repos/my-project
 python static/server.py
-python server.py
 ```
-
-Then open your browser to `http://localhost:8000`
 
 ---
 
@@ -185,12 +187,12 @@ Feature: "Add payment processing with Stripe"
 ## 🏗️ Architecture
 
 ```
-┌─────────────┐
-│   User UI   │
-│ (Streamlit) │
-└──────┬──────┘
-       │
-       ▼
+┌─────────────────┐
+│     User UI     │
+│ (FastAPI + HTML) │
+└────────┬────────┘
+         │
+         ▼
 ┌─────────────────┐
 │  Manager Agent  │
 │  (Orchestrator) │
@@ -237,18 +239,21 @@ Every action is logged for hackathon compliance:
 ## 🎓 Tech Stack
 
 - **AI**: IBM Watsonx (Granite 3 8B Instruct)
-- **Backend**: Python, FastAPI, Streamlit
+- **Backend**: Python, FastAPI
+- **Frontend**: Vanilla HTML/CSS/JS
 - **RAG**: Custom Hybrid RAG with architectural weighting
 - **Context**: IBM Bob repository analysis
 - **Storage**: JSON-based indexing with metadata
+- **Deployment**: Vercel (Serverless Python)
 
 ---
 
 ## 🏆 Hackathon Deliverables
 
-✅ Working application (2 UIs: Streamlit + FastAPI)  
+✅ Working application deployed on Vercel  
 ✅ IBM Bob integration with full audit trail  
 ✅ Sample repository for testing (`sample_repos/ecommerce-api`)  
+✅ Repository upload feature (ZIP)  
 ✅ Comprehensive documentation  
 ✅ Export functionality for session reports  
 
@@ -258,6 +263,8 @@ Every action is logged for hackathon compliance:
 
 ```
 arcsync/
+├── api/                 # Vercel serverless entrypoint
+│   └── index.py         # Re-exports FastAPI app
 ├── agents/              # Multi-agent system
 │   ├── manager.py       # Orchestration agent
 │   ├── context_agent.py # IBM Bob integration
@@ -270,11 +277,11 @@ arcsync/
 │   └── watsonx_client.py
 ├── sample_repos/        # Test repositories
 │   └── ecommerce-api/   # Sample Node.js API
-├── static/              # FastAPI web UI
-│   ├── index.html
-│   ├── script.js
-│   └── server.py
-├── main.py              # Streamlit UI entry point
+├── static/              # Web UI & FastAPI server
+│   ├── index.html       # Frontend interface
+│   ├── script.js        # Frontend logic
+│   └── server.py        # FastAPI application
+├── vercel.json          # Vercel deployment config
 ├── requirements.txt     # Python dependencies
 └── .env.example         # Configuration template
 ```
@@ -354,7 +361,7 @@ MIT License - See [LICENSE](LICENSE) file for details
 ## 📞 Contact
 
 - GitHub: [@JannsenRamos](https://github.com/JannsenRamos)
-- LinkedIn: [Albert Jannsen Ramos](www.linkedin.com/in/dsmle-jannsen-ramos)
+- LinkedIn: [Albert Jannsen Ramos](https://www.linkedin.com/in/dsmle-jannsen-ramos)
 
 ---
 
