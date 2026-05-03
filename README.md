@@ -4,7 +4,7 @@
 > *Turning ideas into impact faster with IBM Bob*
 
 ## 🎥 Demo Video
-[Watch 2-minute demo](#) *(Coming soon)*
+[Watch 2-minute demo](https://drive.google.com/file/d/1yr_mMG23JpOANmzWqUEiZFYiW9F_p4KW/view?usp=sharing)
 
 ---
 
