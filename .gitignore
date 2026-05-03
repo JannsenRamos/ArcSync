@@ -46,10 +46,11 @@ venv.bak/
 *~
 .DS_Store
 
-# Logs
+# Logs (exclude general logs but allow IBM Bob audit logs for hackathon)
 *.log
-logs/
-*.jsonl
+logs/*
+!logs/ibm_bob_audit/
+!logs/ibm_bob_audit/*.jsonl
 
 # Testing
 .pytest_cache/
