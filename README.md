@@ -311,7 +311,7 @@ This is a hackathon project, but contributions are welcome!
 
 ## 👥 Team
 
-**[Your Name]** - Full Stack AI Engineer  
+**Albert Jannsen Ramos** - Full Stack Machine Learning Engineer
 Built with ❤️ and IBM Bob
 
 ---
@@ -332,9 +332,8 @@ MIT License - See [LICENSE](LICENSE) file for details
 
 ## 📞 Contact
 
-- GitHub: [@yourusername](https://github.com/yourusername)
-- Email: your.email@example.com
-- LinkedIn: [Your Name](https://linkedin.com/in/yourprofile)
+- GitHub: [@JannsenRamos](https://github.com/JannsenRamos)
+- LinkedIn: [Albert Jannsen Ramos](www.linkedin.com/in/dsmle-jannsen-ramos)
 
 ---
 
