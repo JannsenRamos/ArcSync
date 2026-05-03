@@ -29,6 +29,11 @@ class RetrieverAgent:
     """
     def __init__(self, index_path="data/index/repo_index.json"):
         self.index_path = Path(index_path)
+        # Fallback to /tmp path on Vercel
+        if not self.index_path.exists():
+            tmp_path = Path("/tmp/data/index/repo_index.json")
+            if tmp_path.exists():
+                self.index_path = tmp_path
         self.index = self._load_index()
 
     def _load_index(self):

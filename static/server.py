@@ -83,18 +83,23 @@ class RepoInfo(BaseModel):
 
 def get_available_repos():
     """Get list of available repositories including custom ones."""
-    repos = [
-        {
+    repos = []
+    
+    # Only add sample repos if they exist on disk
+    ecommerce_path = Path(__file__).parent.parent / "sample_repos" / "ecommerce-api"
+    if ecommerce_path.exists():
+        repos.append({
             "name": "E-Commerce API",
-            "path": str(Path(__file__).parent.parent / "sample_repos" / "ecommerce-api"),
+            "path": str(ecommerce_path),
             "description": "Node.js/Express + MongoDB e-commerce REST API"
-        },
-        {
-            "name": "ArcSync (Self)",
-            "path": str(Path(__file__).parent.parent),
-            "description": "This project — Python/FastAPI multi-agent system"
-        }
-    ]
+        })
+    
+    # Always include self-analysis
+    repos.append({
+        "name": "ArcSync (Self)",
+        "path": str(Path(__file__).parent.parent),
+        "description": "This project — Python/FastAPI multi-agent system"
+    })
     
     # Check for custom repos in test_repos directory
     test_repos_dir = Path(__file__).parent.parent / "test_repos"
@@ -113,8 +118,16 @@ SAMPLE_REPOS = get_available_repos()
 
 # ── Upload Directory Setup ───────────────────────────────────────────────────
 
-UPLOAD_DIR = Path(__file__).parent.parent / "uploaded_repos"
-UPLOAD_DIR.mkdir(exist_ok=True)
+# Use /tmp for uploads on Vercel (read-only filesystem)
+if os.environ.get("VERCEL"):
+    UPLOAD_DIR = Path("/tmp/uploaded_repos")
+else:
+    UPLOAD_DIR = Path(__file__).parent.parent / "uploaded_repos"
+try:
+    UPLOAD_DIR.mkdir(exist_ok=True)
+except OSError:
+    UPLOAD_DIR = Path("/tmp/uploaded_repos")
+    UPLOAD_DIR.mkdir(exist_ok=True)
 
 def detect_repo_name(repo_path: Path) -> str:
     """Detect repository name from package.json, README, or directory name."""

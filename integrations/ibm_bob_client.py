@@ -36,8 +36,16 @@ class IBMBobClient:
     """
     def __init__(self, repo_path="."):
         self.repo_path = Path(repo_path)
-        self.audit_log_path = Path("logs/ibm_bob_audit")
-        self.audit_log_path.mkdir(parents=True, exist_ok=True)
+        # Use /tmp on Vercel (read-only filesystem)
+        if os.environ.get("VERCEL"):
+            self.audit_log_path = Path("/tmp/logs/ibm_bob_audit")
+        else:
+            self.audit_log_path = Path("logs/ibm_bob_audit")
+        try:
+            self.audit_log_path.mkdir(parents=True, exist_ok=True)
+        except OSError:
+            self.audit_log_path = Path("/tmp/logs/ibm_bob_audit")
+            self.audit_log_path.mkdir(parents=True, exist_ok=True)
         self.session_id = f"session_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
 
     def get_repository_context(self):
@@ -259,9 +267,12 @@ class IBMBobClient:
             "timestamp": str(datetime.datetime.now())
         }
 
-        log_file = self.audit_log_path / f"{self.session_id}.jsonl"
-        with open(log_file, "a") as f:
-            f.write(json.dumps(log_entry) + "\n")
+        try:
+            log_file = self.audit_log_path / f"{self.session_id}.jsonl"
+            with open(log_file, "a") as f:
+                f.write(json.dumps(log_entry) + "\n")
+        except OSError:
+            pass  # Gracefully handle read-only filesystem
 
         print(f"[IBM Bob Audit] Task recorded: {task_name}")
 

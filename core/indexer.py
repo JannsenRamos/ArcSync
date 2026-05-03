@@ -9,7 +9,12 @@ class CoreIndexer:
     """
     def __init__(self, index_path="data/index"):
         self.index_path = Path(index_path)
-        self.index_path.mkdir(parents=True, exist_ok=True)
+        try:
+            self.index_path.mkdir(parents=True, exist_ok=True)
+        except OSError:
+            # Vercel read-only filesystem — use /tmp
+            self.index_path = Path("/tmp/data/index")
+            self.index_path.mkdir(parents=True, exist_ok=True)
         self.vector_store = {}
 
     def index_repository(self, bob_metadata):
@@ -95,5 +100,12 @@ class CoreIndexer:
 
     def _save_index(self):
         """Persists the index for rapid retrieval under 30 seconds."""
-        with open(self.index_path / "repo_index.json", "w") as f:
-            json.dump(self.vector_store, f, indent=2)
+        try:
+            with open(self.index_path / "repo_index.json", "w") as f:
+                json.dump(self.vector_store, f, indent=2)
+        except OSError:
+            # Fallback to /tmp on read-only filesystem
+            tmp_path = Path("/tmp/data/index")
+            tmp_path.mkdir(parents=True, exist_ok=True)
+            with open(tmp_path / "repo_index.json", "w") as f:
+                json.dump(self.vector_store, f, indent=2)
