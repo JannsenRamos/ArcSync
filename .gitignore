@@ -124,8 +124,8 @@ yarn-error.log*
 *.swp
 *~
 
-# IBM Bob Audit Logs (keep structure, ignore content)
-logs/ibm_bob_audit/*.jsonl
+# IBM Bob Audit Logs (safe to commit - no sensitive data)
+# logs/ibm_bob_audit/*.jsonl
 
 # Output files
 output_templates/*.md
