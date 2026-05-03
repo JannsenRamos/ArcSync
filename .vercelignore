@@ -1,0 +1,62 @@
+# Vercel ignore file - exclude unnecessary files from deployment
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+logs/
+*.log
+
+# Test files
+tests/
+test_*.py
+*_test.py
+
+# Documentation
+*.md
+!README.md
+*.docx
+*.txt
+!requirements.txt
+
+# Sample repos (too large for deployment)
+sample_repos/
+uploaded_repos/
+test_repos/
+
+# Audit files
+ibm_bob_audits/
+
+# Environment files
+.env
+.env.local
+
+# Git
+.git/
+.gitignore
+
+# Data directories
+data/
+
+# Output templates
+output_templates/
+
+# Temporary files
+*.tmp
+*.bak
+*.zip

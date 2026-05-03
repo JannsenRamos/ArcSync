@@ -110,16 +110,37 @@ WATSONX_URL=https://us-south.ml.cloud.ibm.com
 
 ### Run the Application
 
-**Option 1: FastAPI Web UI (Recommended)**
+**Option 1: Deploy to Vercel (Production)**
+```bash
+# See VERCEL_DEPLOYMENT.md for detailed instructions
+vercel --prod
+```
+🌐 **Live Demo**: Deploy your own instance to Vercel in minutes!
+
+**Option 2: FastAPI Web UI (Local Development)**
 ```bash
 python static/server.py
 # Open http://localhost:8000
 ```
 
-**Option 2: Streamlit UI**
+**Option 3: Streamlit UI (Alternative)**
 ```bash
 streamlit run main.py
 ```
+
+### 🚀 Deploy to Vercel
+
+Deploy ArcSync to production with one click:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/arcsync)
+
+**Quick Deploy Steps:**
+1. Click the button above or push to GitHub
+2. Import your repository to Vercel
+3. Add environment variables (IBM_API_KEY, WATSONX_PROJECT_ID, WATSONX_URL)
+4. Deploy!
+
+📖 **Full deployment guide**: See [VERCEL_DEPLOYMENT.md](VERCEL_DEPLOYMENT.md) for detailed instructions.
 
 ### 📤 Upload Your Own Repository
 
